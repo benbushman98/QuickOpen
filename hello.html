@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="style.css">
+
+<head>
+    <title>Favorite Websites</title>
+    <style>
+        .tab {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="mainHeader">QuickOpen</h1>
+    
+    <!-- Add tabs for different lists -->
+    <div class="tabLinksContainer">
+        <button class="tabLinks" data-tab="list1">WW</button>
+        <button class="tabLinks" data-tab="list2">TA</button>
+        <button class="tabLinks" data-tab="list3">NPI</button>
+    </div>
+    
+    <!-- List 1 -->
+    <div class="tab" id="list1">
+        <button class="openList" id="openFavs1" data-list="list1">Open Worldwide Favorites</button>
+        <h3>Worldwide:</h3>
+        <ol id="favListlist1"></ol>
+    </div>
+
+    <!-- List 2 -->
+    <div class="tab" id="list2">
+        <button class="openList" id="openFavs2" data-list="list2">Open WebDev Favorites</button>
+        <h3>WebDev:</h3>
+        <ol id="favListlist2"></ol>
+    </div>
+
+    <!-- List 3 -->
+    <div class="tab" id="list3">
+        <button class="openList" id="openFavs3" data-list="list3">Open NPI Favorites</button>
+        <h3>NPI:</h3>
+        <ol id="favListlist3"></ol>
+    </div>
+
+    <textarea placeholder="Website, full URL" name="entry" id="entry" cols="30" rows="1"></textarea>
+    <button class="openList" id="submitButton">Add to List</button>
+
+
+    <script src="popup.js" defer></script>
+</body>
+
+</html>
