@@ -137,3 +137,13 @@ input#entry {
 #submitButton:hover {
   background-color: #45a049;
 }
+
+.footerContainer {
+  text-align: center;
+  padding: 10px;
+  
+}
+.footerContainer a {
+  color: grey;
+  text-decoration: none;
+}
