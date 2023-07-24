@@ -46,12 +46,13 @@ function deleteTab() {
     localStorage.setItem(
       `tabName`,
       JSON.stringify(tabArray)
-      );
-      renderTabNameToScreenFromLocalStorage();
-      renderListtoScreenFromLocalStorage();
-    } else {
-      return
-    }
+    );
+    deleteListLocalStorage(element.value)
+    renderTabNameToScreenFromLocalStorage();
+    renderListtoScreenFromLocalStorage();
+  } else {
+    return
+  }
 }
 function addToList() {
   var element = document.getElementById("id_dropdown");
@@ -60,7 +61,7 @@ function addToList() {
   if (listName.value === "") {
     alert("Please enter a valid URL (e.g. https://google.com)")
     return
-  }  
+  }
   localArrays[element.selectedIndex].push(listName.value)
   localStorage.setItem(tabName, JSON.stringify(localArrays[element.selectedIndex]));
   renderListtoScreenFromLocalStorage();
@@ -73,7 +74,12 @@ function init(param) {
 }
 function renderListOnly() {
   renderListtoScreenFromLocalStorage();
+}
 
+function deleteListLocalStorage(listName) {
+  localStorage.removeItem(`${listName}`);
+  // alert("Extension must close and reopen to continue.");
+  window.location.reload();
 }
 
 // Get the Tab Names from Local Storage and Render Them to the Screen
@@ -114,14 +120,14 @@ function renderListtoScreenFromLocalStorage() {
       const modifiedUrl = removeCharactersAfterDomain(url);
       let listItem = document.createElement("li");
       listItem.textContent = modifiedUrl; // Use the modified URL as the text content
-  
+
       let deleteButton = document.createElement("button");
       deleteButton.textContent = "x";
       deleteButton.addEventListener("click", function () {
         console.log("delete List")
         deleteFromLocalStorage(element, i);
       });
-  
+
       listItem.appendChild(deleteButton);
       list.appendChild(listItem);
     }
