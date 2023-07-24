@@ -48,6 +48,7 @@ function deleteTab() {
       JSON.stringify(tabArray)
       );
       renderTabNameToScreenFromLocalStorage();
+      renderListtoScreenFromLocalStorage();
     } else {
       return
     }
