@@ -195,10 +195,12 @@ input#entry {
   padding: 10px;
   font-size: large;
 }
-.newTabContainer{
+.newTabContainer,
+.deleteTabContainer{
   padding: 20px;
 }
-.newTabContainer h2{
+.newTabContainer h2,
+.deleteTabContainer h2 {
   margin-bottom: 10px;
 }
 /* The Close Button */
@@ -215,8 +217,22 @@ input#entry {
   text-decoration: none;
   cursor: pointer;
 }
-.newTabSubmitButton{
+.deleteTabX {
   float: right;
+  margin-right: 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.deleteTabX:hover,
+.deleteTabX:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.newTabSubmitButton,
+.deleteTabSubmitButton {
+  text-align: center;
   padding: 5px;
   background-color: #4CAF50;
   color: #fff;
@@ -224,5 +240,5 @@ input#entry {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 5px;
+  margin-top: 20px;
 }

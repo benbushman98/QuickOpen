@@ -15,11 +15,13 @@ const localArrays = {
 
 // Definition of Global Clickable Event Listeners.
 document.getElementById("newTab").addEventListener("click", newTabModal);
-document.getElementById("deleteTab").addEventListener("click", deleteTab);
+document.getElementById("deleteTab").addEventListener("click", deleteTabModal);
 document.getElementById("submitButton").addEventListener("click", addToList);
 document.getElementById("id_dropdown").onchange = renderListOnly;
 document.getElementById("openTab").addEventListener("click", openFavorites);
 document.getElementById("newTabSubmitButton").addEventListener("click", createNewTab);
+document.getElementById("deleteTabSubmitButton").addEventListener("click", deleteTab);
+
 
 function newTabModal() {
   var modal = document.getElementById("newTabModal");
@@ -64,17 +66,36 @@ function createNewTab() {
   }
 };
 
+function deleteTabModal() {
+  var modal = document.getElementById("deleteTabModal");
+  var span = document.getElementsByClassName("deleteTabX")[0];
+  var element = document.getElementById("id_dropdown").value;
+  var tabContent = document.getElementById("tabContent")
+  tabContent.style.fontWeight = "bold"
+  tabContent.style.fontSize = "14px"
+  tabContent.textContent = element;
+  modal.style.display = "block";
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
 function deleteTab() {
   var element = document.getElementById("id_dropdown");
+  var modal = document.getElementById("deleteTabModal");
+  modal.style.display = "none";
   if (localArrays[element.selectedIndex] === undefined) {
     let warning = ("No list to delete.")
     launchWarning(warning);
     return
   }
-  let confirm = window.confirm(`Are you sure you want to delete your ${element.value} tab?`)
-
-  // console.log(confirm)
-  if (confirm) {
     tabArray.splice(element.selectedIndex, 1);
     localStorage.setItem(
       `tabName`,
@@ -83,9 +104,6 @@ function deleteTab() {
     deleteListLocalStorage(element.value)
     renderTabNameToScreenFromLocalStorage();
     renderListtoScreenFromLocalStorage();
-  } else {
-    return
-  }
 }
 function addToList() {
   var element = document.getElementById("id_dropdown");
