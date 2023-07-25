@@ -22,13 +22,18 @@ document.getElementById("openTab").addEventListener("click", openFavorites)
 
 function createNewTab() {
   let prompt = window.prompt("What is the name of your list?");
-  if (prompt === "" || prompt === null) {
-    console.log("fail")
-    alert("Please Enter a Valid Name")
-  } else {
+  if (prompt === "") {
+    let warning = "Please Enter a Valid Name"
+    launchWarning(warning);
+  } else if (prompt === null) {
+    return;
+  }
+  else {
     const setTabArray = localStorage.getItem("tabName");
     if (setTabArray !== null && setTabArray.includes(prompt)) {
-      alert("List Name Already in Use. Please Name Something Different.")
+      let warning = ("List Name Already in Use. Please Name Something Different.")
+      launchWarning(warning);
+
     } else {
       tabArray.push(prompt);
       localStorage.setItem("tabName", JSON.stringify(tabArray));
@@ -39,7 +44,13 @@ function createNewTab() {
 
 function deleteTab() {
   var element = document.getElementById("id_dropdown");
+  if (localArrays[element.selectedIndex] === undefined) {
+    let warning = ("No list to delete.")
+    launchWarning(warning);
+    return
+  }
   let confirm = window.confirm(`Are you sure you want to delete your ${element.value} tab?`)
+
   // console.log(confirm)
   if (confirm) {
     tabArray.splice(element.selectedIndex, 1);
@@ -59,7 +70,12 @@ function addToList() {
   let tabName = document.getElementById("id_dropdown").value;
   let listName = document.getElementById("entry");
   if (listName.value === "") {
-    alert("Please enter a valid URL (e.g. https://google.com)")
+    let warning = ("Please enter a valid URL (e.g. https://google.com)")
+    launchWarning(warning);
+    return
+  } else if (localArrays[element.selectedIndex] === undefined) {
+    let warning = ("Please create a list.")
+    launchWarning(warning);
     return
   }
   localArrays[element.selectedIndex].push(listName.value)
@@ -68,7 +84,7 @@ function addToList() {
   listName.value = "";
 }
 
-function init(param) {
+function init() {
   renderTabNameToScreenFromLocalStorage();
   renderListtoScreenFromLocalStorage();
 }
@@ -78,7 +94,6 @@ function renderListOnly() {
 
 function deleteListLocalStorage(listName) {
   localStorage.removeItem(`${listName}`);
-  // alert("Extension must close and reopen to continue.");
   window.location.reload();
 }
 
@@ -176,13 +191,33 @@ function openFavorites() {
   const items = getReady ? JSON.parse(getReady) : [];
 
   if (items.length === 0) {
-    console.log("No items in the list.");
-    return; // Nothing to open
+    let warning = "Please create a list before opening.";
+    launchWarning(warning)
   }
 
   for (let i = 0; i < items.length; i++) {
     console.log(`Opening URL: ${items[i]}`);
     window.open(`${items[i]}`, "_blank");
+  }
+}
+
+function launchWarning(warning) {
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  var warningLocaton = document.getElementById("warning");
+
+  warningLocaton.textContent = warning;
+  modal.style.display = "block";
+
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
   }
 }
 
