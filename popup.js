@@ -53,7 +53,7 @@ function createNewTab() {
   }
   else {
     const setTabArray = localStorage.getItem("tabName");
-    if (setTabArray !== null && setTabArray.includes(prompt)) {
+    if (setTabArray !== null && setTabArray.includes(value)) {
       let warning = ("List Name Already in Use. Please Name Something Different.")
       launchWarning(warning);
 
@@ -227,12 +227,10 @@ function deleteFromLocalStorage(element, index) {
 
 function openFavorites() {
   let tabName = document.getElementById("id_dropdown").value;
-  console.log(tabName.split(" "));
 
   const getReady = localStorage.getItem(
     `${tabName}`
   );
-  console.log(getReady);
   const items = getReady ? JSON.parse(getReady) : [];
 
   if (items.length === 0) {
