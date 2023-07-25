@@ -16,17 +16,17 @@
         <div>
             <select class="tabLinksContainer" id="id_dropdown">
             </select>
-            <button class="openTab" id="openTab" data-tab="openTab" title="Open Tab">➡️</button>
+            <button class="openTab" id="openTab" data-tab="openTab" title="Open List">➡️</button>
         </div>
         <div>
-            <button class="newTab" id="newTab" data-tab="newTab" title="New Tab">+</button>
-            <button class="deleteTab" id="deleteTab" data-tab="deleteTab" title="Delete Tab">x</button>
+            <button class="newTab" id="newTab" data-tab="newTab" title="New List">+</button>
+            <button class="deleteTab" id="deleteTab" data-tab="deleteTab" title="Delete List">x</button>
         </div>
     </div>
     <div>
-        <ol class="list" id="list">
+        <div class="list" id="list">
 
-        </ol>
+        </div>
     </div>
 
     <div class="bottomContainer">
@@ -39,12 +39,22 @@
                 <span class="close">&times;</span>
                 <svg class="warningBell" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor">
-                    <path style="fill:#fa0202ce;fill-opacity:1;" stroke-linecap="round" stroke-linejoin="round"
+                    <path style="fill:#f44336;fill-opacity:1;" stroke-linecap="round" stroke-linejoin="round"
                         d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                 </svg>
 
             </div>
             <p id="warning"></p>
+        </div>
+    </div>
+    <div id="newTabModal" class="modal">
+        <div class="modal-content">
+            <span class="closeNewTab">&times;</span>
+            <div class="newTabContainer">
+                <h2>Create a New List</h2>
+                <input type="text" name="ListName" id="ListName" placeholder="e.g. Work">
+                <button class="newTabSubmitButton" id="newTabSubmitButton">Create</button>
+            </div>
         </div>
     </div>
 

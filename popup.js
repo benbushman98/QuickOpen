@@ -14,18 +14,39 @@ const localArrays = {
 };
 
 // Definition of Global Clickable Event Listeners.
-document.getElementById("newTab").addEventListener("click", createNewTab);
+document.getElementById("newTab").addEventListener("click", newTabModal);
 document.getElementById("deleteTab").addEventListener("click", deleteTab);
 document.getElementById("submitButton").addEventListener("click", addToList);
 document.getElementById("id_dropdown").onchange = renderListOnly;
-document.getElementById("openTab").addEventListener("click", openFavorites)
+document.getElementById("openTab").addEventListener("click", openFavorites);
+document.getElementById("newTabSubmitButton").addEventListener("click", createNewTab);
+
+function newTabModal() {
+  var modal = document.getElementById("newTabModal");
+  var span = document.getElementsByClassName("closeNewTab")[0];
+
+  modal.style.display = "block";
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
 
 function createNewTab() {
-  let prompt = window.prompt("What is the name of your list?");
-  if (prompt === "") {
+  let value = document.getElementById("ListName").value;
+  var modal = document.getElementById("newTabModal");
+
+  // alert(value)
+  if (value === "") {
     let warning = "Please Enter a Valid Name"
     launchWarning(warning);
-  } else if (prompt === null) {
+  } else if (value === null) {
     return;
   }
   else {
@@ -35,9 +56,10 @@ function createNewTab() {
       launchWarning(warning);
 
     } else {
-      tabArray.push(prompt);
+      tabArray.push(value);
       localStorage.setItem("tabName", JSON.stringify(tabArray));
       renderTabNameToScreenFromLocalStorage();
+      modal.style.display = "none";
     }
   }
 };
@@ -134,9 +156,14 @@ function renderListtoScreenFromLocalStorage() {
       const url = localArrays[element.selectedIndex][i];
       const modifiedUrl = removeCharactersAfterDomain(url);
       let listItem = document.createElement("li");
-      listItem.textContent = modifiedUrl; // Use the modified URL as the text content
+      let href = document.createElement("a");
+      href.setAttribute("href", url)
+      href.setAttribute("target", "_blank")
+      href.textContent = modifiedUrl; // Use the modified URL as the text content
+      listItem.appendChild(href);
 
       let deleteButton = document.createElement("button");
+      deleteButton.setAttribute("title", "Delete Item")
       deleteButton.textContent = "x";
       deleteButton.addEventListener("click", function () {
         console.log("delete List")

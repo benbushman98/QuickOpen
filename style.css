@@ -95,12 +95,13 @@ h1.mainHeader {
 
 .list li button {
   font-size: 16px;
-  padding: 3px 6px;
+  padding: 5px 10px;
+  margin: 0 5px;
   border: none;
   background-color: #f44336;
   color: #fff;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50%;
   transition: background-color 0.2s ease;
 }
 
@@ -193,4 +194,35 @@ input#entry {
 #warning {
   padding: 10px;
   font-size: large;
+}
+.newTabContainer{
+  padding: 20px;
+}
+.newTabContainer h2{
+  margin-bottom: 10px;
+}
+/* The Close Button */
+.closeNewTab {
+  float: right;
+  margin-right: 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeNewTab:hover,
+.closeNewTab:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.newTabSubmitButton{
+  float: right;
+  padding: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 5px;
 }
